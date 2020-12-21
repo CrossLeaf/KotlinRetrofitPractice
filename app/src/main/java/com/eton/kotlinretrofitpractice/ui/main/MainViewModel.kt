@@ -12,11 +12,11 @@ class MainViewModel : ViewModel() {
     private val repository: TestRepository by lazy { TestRepository() }
     val mldUpdate = MutableLiveData<Boolean>()
 
-    fun hardUpdate() {
+    fun hardUpdate() =
         viewModelScope.launch {
             val response = repository.hardUpdate()
             println("response = $response")
-            when(response) {
+            when (response) {
                 is ApiResult.Success -> {
                     mldUpdate.value = true
                 }
@@ -25,7 +25,5 @@ class MainViewModel : ViewModel() {
                     mldUpdate.value = false
                 }
             }
-
         }
-    }
 }
